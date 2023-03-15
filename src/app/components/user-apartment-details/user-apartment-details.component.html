@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{apartment.title}}</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <img *ngIf="!apartment.photoUrl" src="https://via.placeholder.com/350x200" class="card-img-" alt="Apartment Image">
+          <img *ngIf="apartment.photoUrl" src="{{apartment.photoUrl}}" class="card-img-" alt="Apartment Image">
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3>Details</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">City: {{apartment.city}}</li>
+                <li class="list-group-item">Location: {{apartment.location}}</li>
+                <li class="list-group-item">Price per day: {{apartment.pricePerDay}}$</li>
+                <li class="list-group-item">Rooms number: {{apartment.roomsNumber}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <h2>Bookings</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>City</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>{{booking.startDate | date}}</td>
+            <td>{{booking.endDate | date}}</td>
+            <td>{{booking.city}}</td>
+            <td>{{booking.location}}</td>
+            <td>{{booking.status}}</td>
+            <td>{{booking.totalPrice}}</td>
+            <td>
+              <div *ngIf="booking.status === 'PENDING'">
+                <button class="btn btn-outline-dark me-2" (click)="approveBooking(booking.id!)">Approve</button>
+                <button class="btn btn-outline-danger" (click)="rejectBooking(booking.id!)">Reject</button>
+              </div>
+              <div *ngIf="booking.status !== 'PENDING'">
+                <p>{{booking.status}}</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img *ngIf="!apartment.photoUrl" src="https://via.placeholder.com/350x200" class="card-img-top" alt="Apartment Image">
+        <img *ngIf="apartment.photoUrl" src="{{apartment.photoUrl}}" class="card-img-top" alt="Apartment Image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{apartment.title}}</h5>
+          <p class="card-text">{{apartment.description}}</p>
+          <p class="card-text">{{apartment.location}}</p>
+          <p class="card-text">{{apartment.pricePerDay | currency}}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="checkin">Check-in Date:</label>
+                <input type="date" class="form-control" id="checkin" [(ngModel)]="booking.startDate">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="checkout">Check-out Date:</label>
+                <input type="date" class="form-control" id="checkout" [(ngModel)]="booking.endDate" >
+              </div>
+            </div>
+          </div>
+          <p class="card-text" *ngIf="booking.startDate && booking.endDate">Total Price: {{calculateTotalPrice() | currency}}</p>
+          <button type="button" class="btn btn-dark" (click)="bookApartment()" [disabled]="!booking.startDate || !booking.endDate">Book Now</button>
+
+          <h4>Apartment Bookings</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Start date</th>
+                <th>End date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let booking of bookings">
+                <td>{{booking.startDate | date}}</td>
+                <td>{{booking.endDate | date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

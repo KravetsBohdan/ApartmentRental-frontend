@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand me-3" routerLink="/">
+      <img src="assets/logo.jpg" alt="Logo" height="40">
+    </a>
+    <div class="d-flex align-items-center flex-grow-1 justify-content-center">
+      <a class="navbar-brand" routerLink="/">RentEasy</a>
+    </div>
+    <div class="navbar-nav ms-auto">
+
+      <a *ngIf="!isAuth" class="nav-link text-white" routerLink="/login">Log in</a>
+      <a *ngIf="!isAuth"  class="nav-link text-white" routerLink="/register">Register</a>
+      <a *ngIf="isAuth" class="nav-link text-white" routerLink="/user/profile">{{email}}</a>
+
+      <a *ngIf="isAuth" class="nav-link text-white" (click)="onLogout()" routerLink="/">Logout</a>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+

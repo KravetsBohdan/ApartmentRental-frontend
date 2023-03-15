@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>My bookings</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>City</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>{{booking.startDate | date}}</td>
+            <td>{{booking.endDate | date}}</td>
+            <td>{{booking.city}}</td>
+            <td>{{booking.location}}</td>
+            <td>{{booking.status}}</td>
+            <td>{{booking.totalPrice}}</td>
+            <td>
+              <button *ngIf="booking.status === 'PENDING'" (click)="deleteBooking(booking.id!)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

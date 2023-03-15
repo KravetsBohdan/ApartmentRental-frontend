@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-header bg-dark text-white">Update User Information</div>
+        <div class="card-body">
+          <form [formGroup]="updateUserForm" (ngSubmit)="updateUserInfo()">
+
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" formControlName="firstName" class="form-control" id="firstName" placeholder="Enter first name">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Enter last name">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Enter phone number">
+            </div>
+
+            <button type="submit"  class="btn btn-dark mt-3 text-center">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
