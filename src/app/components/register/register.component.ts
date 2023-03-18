@@ -12,7 +12,7 @@ export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    phoneNumber: new FormControl(''),
+    phone: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl('')
   });
