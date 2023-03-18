@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, observable, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Auth, AuthResponse} from "../interfaces";
 
 @Injectable({
@@ -19,14 +19,12 @@ export class AuthService {
 
 
 
-  login(user: Auth): Observable<string> {
-    return this.httpClient.post(this.loginUrl, user, { responseType: 'text' })
-      .pipe(
-        tap((response: string) => {
-          this.setToken(response);
-          this.isAuthenticatedSubject.next(true);
-        })
-      );
+  login(user: Auth): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(this.loginUrl, user)
+      .pipe(tap((response: AuthResponse) => {
+        this.setToken(response.token);
+        this.isAuthenticatedSubject.next(true);
+      }));
   }
 
   logout(): void {

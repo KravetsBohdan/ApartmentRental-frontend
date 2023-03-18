@@ -1,3 +1,3 @@
 export interface AuthResponse {
-  text: string;
+  token: string;
 }
