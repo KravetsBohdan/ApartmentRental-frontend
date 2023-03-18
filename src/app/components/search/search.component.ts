@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
   apartments: Apartment[] = [];
 
   currentPage = 1;
-  pageSize = 10;
+  pageSize = 3;
   totalItems: number;
   sortDir = 'asc';
 
