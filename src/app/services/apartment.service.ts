@@ -13,8 +13,8 @@ export class ApartmentService {
 
   getAllApartments(page: number, size: number, query: string, city: string, sortBy: string, sortDir: string): Observable<any> {
     let params = new HttpParams();
-    params = params.append('page', page.toString());
-    params = params.append('size', size.toString());
+    params = params.append('page', page);
+    params = params.append('size', size);
     params = params.append('query', query);
     params = params.append('city', city);
     params = params.append('sortBy', sortBy);
