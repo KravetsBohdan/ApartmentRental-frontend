@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Apartment, User} from "../../interfaces";
+import {User} from "../../interfaces";
 import {FormControl, FormGroup} from "@angular/forms";
-import {ApartmentService} from "../../services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 
@@ -37,7 +36,7 @@ export class UserUpdateComponent implements OnInit{
 
   updateUserInfo() {
     this.userService.updateUser(this.updateUserForm.value).subscribe(() => {
-      alert('Apartment updated successfully!');
+      alert('User info updated successfully!');
       this.router.navigate(['/user/profile']);
     });
   }
