@@ -12,7 +12,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
 import {RouterLink, RouterModule, Routes} from "@angular/router";
 import {AuthInterceptor} from './services/auth.interceptor';
-import {BookingComponent} from './components/booking/booking.component';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {UserApartmentsComponent} from './components/user-apartments/user-apartments.component';
 import {UserBookingsComponent} from './components/user-bookings/user-bookings.component';
@@ -63,7 +62,6 @@ const routes: Routes = [
     UserComponent,
     RegisterComponent,
     LoginComponent,
-    BookingComponent,
     UserProfileComponent,
     UserApartmentsComponent,
     UserBookingsComponent,
