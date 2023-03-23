@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Apartment, Booking} from "../../interfaces";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ApartmentService} from "../../services";
 import {BookingService} from "../../services/booking.service";
 
@@ -15,8 +15,7 @@ export class UserApartmentDetailsComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private apartmentService: ApartmentService,
-              private bookingService: BookingService,
-              private router:Router) { }
+              private bookingService: BookingService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -26,20 +25,23 @@ export class UserApartmentDetailsComponent implements OnInit{
       });
       this.apartmentService.getBookingsByApartmentId(id).subscribe(bookings => {
         this.bookings = bookings;
-        console.log(bookings);
       });
     });
   }
 
   approveBooking(id: number) {
     this.bookingService.approveBooking(id).subscribe(() => {
-      this.router.navigate(['/user/apartments'])
+     this.apartmentService.getBookingsByApartmentId(this.apartment.id).subscribe(bookings => {
+        this.bookings = bookings;
+     });
     });
   }
 
   rejectBooking(id: number) {
     this.bookingService.rejectBooking(id).subscribe(() => {
-      this.router.navigate(['/user/apartments'])
+      this.apartmentService.getBookingsByApartmentId(this.apartment.id).subscribe(bookings => {
+        this.bookings = bookings;
+      });
     });
   }
 }
