@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Apartment} from "../../interfaces";
 import {UserService} from "../../services/user.service";
 import {ApartmentService} from "../../services";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-apartments',
@@ -14,8 +13,7 @@ export class UserApartmentsComponent implements OnInit {
   apartments: Apartment[] = [];
 
   constructor(private userService: UserService,
-              private apartmentService: ApartmentService,
-              private router: Router) {
+              private apartmentService: ApartmentService) {
   }
 
   ngOnInit(): void {
@@ -26,8 +24,7 @@ export class UserApartmentsComponent implements OnInit {
 
   delete(id: number) {
     this.apartmentService.deleteApartment(id).subscribe(() => {
-      this.apartments = this.apartments.filter((apartment) => apartment.id !== id);
-
+      this.ngOnInit();
     });
   }
 }
