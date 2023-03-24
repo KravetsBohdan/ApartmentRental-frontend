@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthService} from "../../services";
-import {UserService} from "../../services/user.service";
+import {UserService, AuthService} from "../../services";
+
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,7 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
+  error: string;
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
@@ -20,10 +21,15 @@ export class LoginComponent{
   }
 
 
-
+  //
   login(): void {
-    this.authService.login(this.loginForm.getRawValue()).subscribe(() => {
+    this.authService.login(this.loginForm.getRawValue()).subscribe(
+      data => {
         this.router.navigate(['user']);
-    });
+      },
+      error => {
+        this.error = error
+      }
+    );
   }
 }

@@ -20,8 +20,10 @@
 
             </div>
 
-            <button type="submit"  class="btn btn-dark mt-3 text-center">Login</button>
+            <button type="submit"  class="btn btn-dark mt-1 text-center">Login</button>
           </form>
+
+          <pre *ngIf="error" class="text text-danger mt-2">{{error}}</pre>
         </div>
       </div>
     </div>
