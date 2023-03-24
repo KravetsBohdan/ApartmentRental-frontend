@@ -3,30 +3,32 @@
     <h3>My Apartments</h3>
     <a routerLink="/user/apartments/new" class="btn btn-dark">Add Apartment</a>
   </div>
-  <ul class="list-group">
-    <li *ngFor="let apt of apartments">
-      <div class="card">
+
+
+  <ul *ngFor="let apt of apartments" class="list-unstyled list-group">
+    <li class="card">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <img *ngIf="!apt.photoUrl" src="https://via.placeholder.com/350x200" class="card-img-top"
                  alt="Apartment Image">
             <img *ngIf="apt.photoUrl" src="{{apt?.photoUrl}}" class="card-img-top" alt="Apartment Image">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-3">
             <div class="card-body">
               <a routerLink="/user/apartments/{{apt.id}}" class="text-decoration-none text-dark">
                 <h5 class="card-title">{{apt.title}}</h5>
               </a>
               <p class="card-text">{{apt.description}}</p>
               <p class="card-text">{{apt.location}}</p>
-              <div class="d-flex justify-content-end">
-                <a routerLink="/user/apartments/{{apt.id}}/update" class="btn btn-outline-dark me-2">Update</a>
-                <button type="button" class="btn btn-outline-danger" (click)="delete(apt.id)">Delete</button>
-              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-body d-flex justify-content-end">
+              <a routerLink="/user/apartments/{{apt.id}}/update" class="btn btn-outline-dark me-2">Update</a>
+              <button type="button" class="btn btn-outline-danger" (click)="delete(apt.id)">Delete</button>
             </div>
           </div>
         </div>
-      </div>
     </li>
   </ul>
 </div>
