@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { FooterComponent } from './components/footer/footer.component';
 
 
 const routes: Routes = [
@@ -70,6 +71,7 @@ const routes: Routes = [
     ApartmentAddComponent,
     UserUpdateComponent,
     UserApartmentDetailsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
