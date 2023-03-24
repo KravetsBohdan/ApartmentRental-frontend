@@ -8,30 +8,29 @@ import {urls} from "../constants";
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'http://localhost:8080/api/users';
 
   constructor(private httpClient: HttpClient) {}
 
 
   getCurrentUser(): Observable<User> {
 
-   return  this.httpClient.get<User>(`${this.url}/me`)
+   return  this.httpClient.get<User>(`${urls.users}/me`)
   }
 
   register(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}/register`, user);
+    return this.httpClient.post<User>(`${urls.users}/register`, user);
   }
 
   getUserApartments(): Observable<Apartment[]> {
-    return this.httpClient.get<Apartment[]>(`${this.url}/me/apartments`)
+    return this.httpClient.get<Apartment[]>(`${urls.users}/me/apartments`)
   }
 
   getUserBookings(): Observable<Booking[]> {
-    return this.httpClient.get<Booking[]>(`${this.url}/me/bookings`)
+    return this.httpClient.get<Booking[]>(`${urls.users}/me/bookings`)
   }
 
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.url}/me`, user);
+    return this.httpClient.put<User>(`${urls.users}/me`, user);
   }
 
 }

@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {BehaviorSubject, catchError, Observable, tap, throwError} from "rxjs";
 import {Auth, AuthResponse} from "../interfaces";
+import {urls} from "../constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private token = 'token';
-  private loginUrl = 'http://localhost:8080/api/users/login';
   private isAuthenticatedSubject: BehaviorSubject<boolean>;
 
 
@@ -17,14 +17,23 @@ export class AuthService {
     this.isAuthenticatedSubject = new BehaviorSubject<boolean>(initialAuthState);
   }
 
-
+  handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 400) {
+      const validationErrors = error.error;
+      const errorMessage = Object.values(validationErrors).map(value => `${value}`).join('\n');
+      return throwError(() => errorMessage);
+    } else {
+      const errorMessage = 'You entered wrong email or password';
+      return throwError(() => errorMessage);
+    }
+  }
 
   login(user: Auth): Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(this.loginUrl, user)
+    return this.httpClient.post<AuthResponse>(`${urls.users}/login`, user)
       .pipe(tap((response: AuthResponse) => {
         this.setToken(response.token);
         this.isAuthenticatedSubject.next(true);
-      }));
+      }), catchError(this.handleError));
   }
 
   logout(): void {

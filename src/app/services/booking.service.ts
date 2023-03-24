@@ -1,29 +1,31 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Booking} from "../interfaces";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {urls} from "../constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-  private readonly API_URL = 'http://localhost:8080/api/bookings';
+
   constructor(private http: HttpClient) { }
+
   addBooking(booking: Booking, apartmentId: number): Observable<Booking> {
-    const url = `${this.API_URL}/${apartmentId}`;
+    const url = `${urls.bookings}/${apartmentId}`;
     return this.http.post<Booking>(url, booking);
   }
 
   deleteBooking(id: number): Observable<void> {
-   return this.http.delete<void>(`${this.API_URL}/${id}`);
+   return this.http.delete<void>(`${urls.bookings}/${id}`);
   }
 
   rejectBooking(id: number): Observable<void> {
-    return this.http.patch<void>(`${this.API_URL}/${id}/reject`, null);
+    return this.http.patch<void>(`${urls.bookings}/${id}/reject`, null);
   }
 
   approveBooking(id: number): Observable<void> {
-    return this.http.patch<void>(`${this.API_URL}/${id}/confirm`, null);
+    return this.http.patch<void>(`${urls.bookings}/${id}/confirm`, null);
 
   }
 }

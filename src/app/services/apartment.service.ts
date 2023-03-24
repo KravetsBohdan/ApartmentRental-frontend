@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Apartment, Booking} from "../interfaces";
 import {Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
@@ -37,10 +37,6 @@ export class ApartmentService {
 
   deleteApartment(id: number): Observable<void> {
     return this.http.delete<void>(`${urls.apartments}/${id}`);
-  }
-
-  getBookedDays(apartmentId: number): Observable<Date[]> {
-    return this.http.get<Date[]>(`${urls.apartments}/${apartmentId}/booked-days`);
   }
 
   getBookingsByApartmentId(id: number): Observable<Booking[]> {
