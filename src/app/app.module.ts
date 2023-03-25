@@ -11,7 +11,7 @@ import {UserComponent} from './components/user/user.component';
 import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
 import {RouterLink, RouterModule, Routes} from "@angular/router";
-import {AuthInterceptor} from './services/auth.interceptor';
+import {AuthInterceptor} from './services';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {UserApartmentsComponent} from './components/user-apartments/user-apartments.component';
 import {UserBookingsComponent} from './components/user-bookings/user-bookings.component';
@@ -21,13 +21,9 @@ import {ApartmentUpdateComponent} from './components/apartment-update/apartment-
 import {ApartmentAddComponent} from './components/apartment-add/apartment-add.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {UserUpdateComponent} from './components/user-update/user-update.component';
-import { UserApartmentDetailsComponent } from './components/user-apartment-details/user-apartment-details.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import { FooterComponent } from './components/footer/footer.component';
+import {UserApartmentDetailsComponent} from './components/user-apartment-details/user-apartment-details.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FooterComponent} from './components/footer/footer.component';
 
 
 const routes: Routes = [
@@ -82,10 +78,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgxPaginationModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
