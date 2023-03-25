@@ -22,7 +22,6 @@ import {ApartmentAddComponent} from './components/apartment-add/apartment-add.co
 import {NgxPaginationModule} from "ngx-pagination";
 import {UserUpdateComponent} from './components/user-update/user-update.component';
 import {UserApartmentDetailsComponent} from './components/user-apartment-details/user-apartment-details.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FooterComponent} from './components/footer/footer.component';
 
 
@@ -77,7 +76,6 @@ const routes: Routes = [
     RouterLink,
     RouterModule.forRoot(routes),
     NgxPaginationModule,
-    BrowserAnimationsModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
