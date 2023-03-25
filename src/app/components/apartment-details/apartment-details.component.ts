@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Apartment, Booking} from "../../interfaces";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ApartmentService, AuthService} from "../../services";
-import {BookingService} from "../../services/booking.service";
-import {DateFilterFn} from "@angular/material/datepicker";
+import {ApartmentService, AuthService, BookingService} from "../../services";
+
 
 
 @Component({
@@ -12,6 +11,7 @@ import {DateFilterFn} from "@angular/material/datepicker";
   styleUrls: ['./apartment-details.component.css']
 })
 export class ApartmentDetailsComponent implements OnInit {
+  isAuth: boolean = false;
   apartment: Apartment;
   bookings: Booking[] = [];
   booking: Booking = {
@@ -20,7 +20,6 @@ export class ApartmentDetailsComponent implements OnInit {
     endDate: new Date(),
     totalPrice: 0
   };
-  disabledDates: Date[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,37 +27,38 @@ export class ApartmentDetailsComponent implements OnInit {
     private authService: AuthService,
     private bookingService: BookingService,
     private apartmentService: ApartmentService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.apartmentService.getApartmentById(+params.get('id')!).subscribe(apartment => {
         this.apartment = apartment;
-        this.apartmentService.getBookedDays(this.apartment.id).subscribe(bookedDays => {
-          this.disabledDates = bookedDays;
-        });
         this.apartmentService.getBookingsByApartmentId(this.apartment.id).subscribe(bookings => {
           this.bookings = bookings;
+        });
+        this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
+          this.isAuth = isAuth;
         });
       });
     });
   }
 
 
-
   bookApartment() {
-    this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
-      if (!isAuth) {
-        this.router.navigate(['/login']);
-        return;
-      }
+    if (!this.isAuth) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
-      this.booking.totalPrice = this.calculateTotalPrice();
-      this.bookingService.addBooking(this.booking, this.apartment.id).subscribe(
-        () => {
-          this.router.navigate(['/apartments']);
-        });
-    });
+
+    this.booking.totalPrice = this.calculateTotalPrice();
+
+    this.bookingService.addBooking(this.booking, this.apartment.id).subscribe(
+      () => {
+        this.router.navigate(['/apartments']);
+      }
+    );
   }
 
   calculateTotalPrice(): number {
@@ -69,7 +69,7 @@ export class ApartmentDetailsComponent implements OnInit {
     const startDate = new Date(this.booking.startDate);
     const endDate = new Date(this.booking.endDate);
     const numDays = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-    return numDays * this.apartment.pricePerDay;
+    return (numDays + 1) * this.apartment.pricePerDay;
   }
 
 }
