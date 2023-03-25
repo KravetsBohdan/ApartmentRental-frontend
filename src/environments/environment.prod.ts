@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API: 'https://apartmentrentalapplication-production.up.railway.app/api'
 };
