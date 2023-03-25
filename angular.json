@@ -16,10 +16,6 @@
             "outputPath": "dist/apartment-rent-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "customWebpackConfig": {
-              "path": "./extra-webpack.config.js",
-              "replaceDuplicatePlugins": true
-            },
             "polyfills": [
               "zone.js"
             ],
