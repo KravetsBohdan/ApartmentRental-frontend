@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {ApartmentService} from "../../services";
+import {ApartmentService, PhotoService} from "../../services";
 import {Router} from "@angular/router";
-import {cities} from "../../constants/cities";
+import {cities} from "../../constants";
 import {Apartment} from "../../interfaces";
-import {PhotoService} from "../../services/photo.service";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-add-apartment',

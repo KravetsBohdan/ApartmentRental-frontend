@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ApartmentService} from "../../services";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Apartment} from "../../interfaces";
-import {cities} from "../../constants/cities";
+import {cities} from "../../constants";
 
 @Component({
   selector: 'app-update-apartment',

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Apartment, Booking} from "../../interfaces";
 import {ActivatedRoute} from "@angular/router";
 import {ApartmentService} from "../../services";
-import {BookingService} from "../../services/booking.service";
+import {BookingService} from "../../services";
 
 @Component({
   selector: 'app-user-apartment-details',

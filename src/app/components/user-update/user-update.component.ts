@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../interfaces";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../services";
 
 @Component({
   selector: 'app-user-update',
