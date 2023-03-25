@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  API: 'http://localhost:8080/api'
+  API: 'https://railway.app/project/2c7265ff-8491-4a86-bcd9-09852efcee5f/api'
 };
