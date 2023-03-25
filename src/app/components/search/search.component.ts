@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Apartment} from "../../interfaces";
 import {ApartmentService} from "../../services";
-import {cities} from "../../constants/cities";
+import {cities} from "../../constants";
 import {Router} from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
   query = '';
-  city = '';
+  city = 'All cities';
   cities: string[] = ['All cities', ...cities];
   apartments: Apartment[] = [];
 
@@ -42,7 +42,6 @@ export class SearchComponent implements OnInit {
         (data) => {
           this.apartments = data.content;
           this.totalItems = data.totalElements;
-          console.log(data);
         },
         (error) => {
           console.error(error);

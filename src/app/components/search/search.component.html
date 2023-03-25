@@ -15,17 +15,16 @@
      {{ sortDir === 'asc' ? 'asc' : 'desc' }}
   </button>
 
-  <div class="mt-4">
-    <ul class="list-group">
-      <li
-        *ngFor="let apt of apartments | paginate:{id:'apartments',itemsPerPage:pageSize,totalItems:totalItems, currentPage: currentPage}"
-        class="list-group-item-dark">
-        <app-apartment [apartment]="apt"></app-apartment>
+    <ul *ngFor="let apartment of apartments | paginate:{id:'apartments',itemsPerPage:pageSize,totalItems:totalItems, currentPage: currentPage}"
+                class="list-unstyled list-group">
+      <li>
+        <app-apartment [apartment]="apartment"></app-apartment>
       </li>
     </ul>
-    <div>
+
+    <div *ngIf="apartments" class="mt-2 d-flex justify-content-center">
       <pagination-controls id="apartments"
                            (pageChange)="currentPage = $event; onSearch()"></pagination-controls>
     </div>
-  </div>
+
 </div>
