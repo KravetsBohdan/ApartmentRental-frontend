@@ -11,12 +11,12 @@ export class ApartmentService {
 
   constructor(private http: HttpClient) { }
 
-  getAllApartments(page: number, size: number, query: string, city: string, sortBy: string, sortDir: string): Observable<any> {
+  getAllApartments(query: string, city: string, page: number, size: number, sortBy: string, sortDir: string): Observable<any> {
     let params = new HttpParams();
-    params = params.append('page', page);
-    params = params.append('size', size);
     params = params.append('query', query);
     params = params.append('city', city);
+    params = params.append('page', page);
+    params = params.append('size', size);
     params = params.append('sortBy', sortBy);
     params = params.append('sortDir', sortDir);
 
