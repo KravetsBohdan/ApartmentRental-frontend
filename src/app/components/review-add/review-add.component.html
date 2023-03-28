@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-header bg-dark text-white">Register</div>
+        <div class="card-body">
+          <form [formGroup]="reviewForm" (ngSubmit)="addReview()">
+
+            <div class="form-group">
+              <label for="reviewText">Review Text</label>
+              <input type="text" formControlName="reviewText" class="form-control" id="reviewText" placeholder="Enter text of review">
+            </div>
+
+            <div class="form-group">
+              <label for="rating">Rating</label>
+              <input type="number" formControlName="rating" class="form-control" id="rating" placeholder="Enter apartment rating between 1 and 5">
+            </div>
+
+            <button type="submit"  class="btn btn-dark mt-3 text-center">Add review</button>
+
+            <pre class="pt-1 text-danger" *ngIf="error">{{error}}</pre>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
