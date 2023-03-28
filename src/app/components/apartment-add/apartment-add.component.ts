@@ -25,6 +25,7 @@ export class ApartmentAddComponent implements OnInit {
 
   apartment: Apartment;
   photo: File;
+  error: string;
 
   constructor(private apartmentService: ApartmentService,
               private router: Router,
@@ -47,6 +48,8 @@ export class ApartmentAddComponent implements OnInit {
             this.apartmentService.addApartment(this.apartment).subscribe(() => {
               alert('Apartment added successfully!');
               this.router.navigate(['/user/apartments']);
+            },error => {
+              this.error = error;
             });
           });
       } else {

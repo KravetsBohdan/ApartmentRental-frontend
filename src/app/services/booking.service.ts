@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Booking} from "../interfaces";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
 import {urls} from "../constants";
 
 @Injectable({
@@ -13,7 +13,7 @@ export class BookingService {
 
   addBooking(booking: Booking, apartmentId: number): Observable<Booking> {
     const url = `${urls.bookings}/${apartmentId}`;
-    return this.http.post<Booking>(url, booking);
+    return this.http.post<Booking>(url, booking).pipe(catchError(this.handleError));
   }
 
   deleteBooking(id: number): Observable<void> {
@@ -27,5 +27,16 @@ export class BookingService {
   approveBooking(id: number): Observable<void> {
     return this.http.patch<void>(`${urls.bookings}/${id}/confirm`, null);
 
+  }
+
+  handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 400) {
+      const validationErrors = error.error;
+      const errorMessage = Object.values(validationErrors).map(value => `${value}`).join('\n');
+      return throwError(() => errorMessage);
+    } else {
+      const errorMessage = error.error?.message;
+      return throwError(() => errorMessage);
+    }
   }
 }

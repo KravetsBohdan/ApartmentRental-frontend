@@ -39,18 +39,19 @@
 
             <div class="form-group">
               <label for="roomsNumber">Number of Rooms</label>
-              <input type="number" id="roomsNumber" formControlName="roomsNumber" class="form-control" placeholder="Enter number of rooms for apartment">
+              <input type="number" id="roomsNumber" formControlName="roomsNumber" class="form-control"
+                     placeholder="Enter number of rooms for apartment">
             </div>
 
 
             <div class="form-group">
               <label for="photo">Image</label>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" id="photo">
-          </div>
+              <input type="file" (change)="onFileSelected($event)" accept="image/*" id="photo">
+            </div>
 
 
-          <button type="submit" [disabled]="!addApartmentForm.valid" class="btn btn-dark">Add Apartment</button>
-
+            <button type="submit" class="btn btn-dark">Add Apartment</button>
+            <pre class="pt-2 text-danger" *ngIf="error">{{error}}</pre>
 
           </form>
         </div>

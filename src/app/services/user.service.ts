@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
 import {Apartment, Booking, User} from "../interfaces";
 import {urls} from "../constants";
 
@@ -18,7 +18,8 @@ export class UserService {
   }
 
   register(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${urls.users}/register`, user);
+    return this.httpClient.post<User>(`${urls.users}/register`, user)
+      .pipe(catchError(this.handleError));
   }
 
   getUserApartments(): Observable<Apartment[]> {
@@ -30,7 +31,18 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${urls.users}/me`, user);
+    return this.httpClient.put<User>(`${urls.users}/me`, user)
+      .pipe(catchError(this.handleError));
   }
 
+  handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 400) {
+      const validationErrors = error.error;
+      const errorMessage = Object.values(validationErrors).map(value => `${value}`).join('\n');
+      return throwError(() => errorMessage);
+    } else {
+      const errorMessage = error.error?.message;
+      return throwError(() => errorMessage);
+    }
+  }
 }

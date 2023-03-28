@@ -28,6 +28,7 @@
           <p class="card-text" *ngIf="booking.startDate && booking.endDate">Total Price: {{calculateTotalPrice() | currency}}</p>
           <button type="button" class="btn btn-dark" (click)="bookApartment()" [disabled]="!booking.startDate || !booking.endDate">Book Now</button>
 
+          <pre class="pt-1 text-danger" *ngIf="error">{{error}}</pre>
           <h4>Apartment Bookings</h4>
           <table class="table table-striped">
             <thead>

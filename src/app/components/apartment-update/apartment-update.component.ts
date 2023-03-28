@@ -11,6 +11,7 @@ import {cities} from "../../constants";
   styleUrls: ['./apartment-update.component.css']
 })
 export class ApartmentUpdateComponent implements OnInit{
+  error: string;
   apartment: Apartment;
   cities: string[] = cities;
 
@@ -43,6 +44,9 @@ export class ApartmentUpdateComponent implements OnInit{
     this.apartmentService.updateApartment(this.apartment.id, this.updateApartmentForm.value).subscribe(() => {
       alert('Apartment updated successfully!');
       this.router.navigate(['/user/apartments']);
-    });
+    },
+      error => {
+        this.error = error;
+      });
   }
 }

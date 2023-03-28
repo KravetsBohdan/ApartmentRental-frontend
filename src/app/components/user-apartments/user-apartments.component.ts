@@ -9,7 +9,7 @@ import {ApartmentService} from "../../services";
   styleUrls: ['./user-apartments.component.css']
 })
 export class UserApartmentsComponent implements OnInit {
-
+  error: string;
   apartments: Apartment[] = [];
 
   constructor(private userService: UserService,
@@ -25,6 +25,9 @@ export class UserApartmentsComponent implements OnInit {
   delete(id: number) {
     this.apartmentService.deleteApartment(id).subscribe(() => {
       this.ngOnInit();
-    });
+    },
+      error => {
+        this.error = error;
+      });
   }
 }

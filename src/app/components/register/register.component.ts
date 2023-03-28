@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  error: string;
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -26,6 +27,10 @@ export class RegisterComponent {
   register(): void {
     this.userService.register(this.registerForm.getRawValue()).subscribe(() => {
       this.router.navigate(['login']);
-    });
+    },
+      error => {
+        console.log(error);
+        this.error = error;
+      });
   }
 }

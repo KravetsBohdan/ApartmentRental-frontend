@@ -16,10 +16,11 @@ export class ApartmentDetailsComponent implements OnInit {
   bookings: Booking[] = [];
   booking: Booking = {
     id: 0,
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: null,
+    endDate: null,
     totalPrice: 0
   };
+  error: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +58,9 @@ export class ApartmentDetailsComponent implements OnInit {
     this.bookingService.addBooking(this.booking, this.apartment.id).subscribe(
       () => {
         this.router.navigate(['/apartments']);
+      },
+      error => {
+        this.error = error;
       }
     );
   }
