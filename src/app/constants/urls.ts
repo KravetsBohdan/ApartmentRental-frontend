@@ -6,5 +6,6 @@ export const urls ={
   apartments:`${API}/apartments`,
   users:`${API}/users`,
   bookings:`${API}/bookings`,
-  photos:`${API}/photos`
+  photos:`${API}/photos`,
+  reviews:`${API}/reviews`
 }

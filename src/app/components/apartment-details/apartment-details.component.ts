@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Apartment, Booking} from "../../interfaces";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ApartmentService, AuthService, BookingService} from "../../services";
+import {ApartmentService, AuthService, BookingService, ReviewService} from "../../services";
+import {Review} from "../../interfaces/review";
 
 
 
@@ -14,6 +15,7 @@ export class ApartmentDetailsComponent implements OnInit {
   isAuth: boolean = false;
   apartment: Apartment;
   bookings: Booking[] = [];
+  reviews: Review[] = [];
   booking: Booking = {
     id: 0,
     startDate: null,
@@ -21,22 +23,28 @@ export class ApartmentDetailsComponent implements OnInit {
     totalPrice: 0
   };
   error: string;
+  apartmentId: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private bookingService: BookingService,
-    private apartmentService: ApartmentService
+    private apartmentService: ApartmentService,
+    private reviewService: ReviewService
   ) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.apartmentService.getApartmentById(+params.get('id')!).subscribe(apartment => {
+      this.apartmentId = +params.get('id')!;
+      this.apartmentService.getApartmentById(this.apartmentId).subscribe(apartment => {
         this.apartment = apartment;
         this.apartmentService.getBookingsByApartmentId(this.apartment.id).subscribe(bookings => {
           this.bookings = bookings;
+        });
+        this.reviewService.getReviewsByApartmentId(this.apartment.id).subscribe(reviews => {
+          this.reviews = reviews;
         });
         this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
           this.isAuth = isAuth;

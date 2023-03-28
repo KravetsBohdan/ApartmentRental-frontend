@@ -4,3 +4,4 @@ export * from './booking.service';
 export * from './user.service';
 export * from './photo.service';
 export * from './auth.interceptor'
+export * from './review.service'

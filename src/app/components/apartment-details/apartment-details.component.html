@@ -27,7 +27,7 @@
           </div>
           <p class="card-text" *ngIf="booking.startDate && booking.endDate">Total Price: {{calculateTotalPrice() | currency}}</p>
           <button type="button" class="btn btn-dark" (click)="bookApartment()" [disabled]="!booking.startDate || !booking.endDate">Book Now</button>
-
+          <a class="btn btn-dark mt-3 text-center" routerLink="/apartments/{{apartmentId}}/add-review"></a>
           <pre class="pt-1 text-danger" *ngIf="error">{{error}}</pre>
           <h4>Apartment Bookings</h4>
           <table class="table table-striped">
@@ -41,6 +41,22 @@
               <tr *ngFor="let booking of bookings">
                 <td>{{booking.startDate | date}}</td>
                 <td>{{booking.endDate | date}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Apartment Review</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Rating</th>
+                <th>Review</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let review of reviews">
+                <td>{{review.rating}}</td>
+                <td>{{review.reviewText}}</td>
               </tr>
             </tbody>
           </table>

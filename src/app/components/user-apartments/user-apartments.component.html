@@ -5,27 +5,27 @@
   </div>
 
   <pre  class="pt-1 text-danger" *ngIf="error">{{error}}</pre>
-  <ul *ngFor="let apt of apartments" class="list-unstyled list-group">
+  <ul *ngFor="let apartment of apartments" class="list-unstyled list-group">
     <li class="card">
       <div class="row">
         <div class="col-md-3">
-          <img *ngIf="!apt.photoUrl" src="https://via.placeholder.com/350x200" class="card-img-top"
+          <img *ngIf="!apartment.photoUrl" src="https://via.placeholder.com/350x200" class="card-img-top"
                alt="Apartment Image">
-          <img *ngIf="apt.photoUrl" src="{{apt?.photoUrl}}" class="card-img-top" alt="Apartment Image">
+          <img *ngIf="apartment.photoUrl" src="{{apartment?.photoUrl}}" class="card-img-top" alt="Apartment Image">
         </div>
         <div class="col-md-3">
           <div class="card-body">
-            <a routerLink="/user/apartments/{{apt.id}}" class="text-decoration-none text-dark">
-              <h5 class="card-title">{{apt.title}}</h5>
+            <a routerLink="/user/apartments/{{apartment.id}}" class="text-decoration-none text-dark">
+              <h5 class="card-title">{{apartment.title}}</h5>
             </a>
-            <p class="card-text">{{apt.description}}</p>
-            <p class="card-text">{{apt.location}}</p>
+            <p class="card-text">{{apartment.description}}</p>
+            <p class="card-text">{{apartment.location}}</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="card-body d-flex justify-content-end">
-            <a routerLink="/user/apartments/{{apt.id}}/update" class="btn btn-outline-dark me-2">Update</a>
-            <button type="button" class="btn btn-outline-danger" (click)="delete(apt.id)">Delete</button>
+            <a routerLink="/user/apartments/{{apartment.id}}/update" class="btn btn-outline-dark me-2">Update</a>
+            <button type="button" class="btn btn-outline-danger" (click)="delete(apartment.id)">Delete</button>
           </div>
         </div>
       </div>

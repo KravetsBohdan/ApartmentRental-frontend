@@ -23,6 +23,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {UserUpdateComponent} from './components/user-update/user-update.component';
 import {UserApartmentDetailsComponent} from './components/user-apartment-details/user-apartment-details.component';
 import {FooterComponent} from './components/footer/footer.component';
+import { ReviewAddComponent } from './components/review-add/review-add.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {path: 'apartments/:id', component: ApartmentDetailsComponent, pathMatch: 'full'},
+  {path: 'apartments/:id/add-review', component: ReviewAddComponent, pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
@@ -67,6 +69,7 @@ const routes: Routes = [
     UserUpdateComponent,
     UserApartmentDetailsComponent,
     FooterComponent,
+    ReviewAddComponent,
   ],
   imports: [
     BrowserModule,
